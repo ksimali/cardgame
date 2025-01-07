@@ -11,6 +11,35 @@ class View {
 	public void something() {}
 	
 	public void setController(GameController gc) {}
+	
+	public void promptForPlayerName() {
+		
+	};
+	
+	public void promptForFlip() {
+		
+	};
+	
+	public void promptForNewGame() {
+		
+	};
+	
+	public void showWinner(String name) {
+		
+	}
+	
+	public void showPlayerName(int size, String playerName) {
+		
+	};
+	
+	public void showFaceDownCardForPlayer(int i, String playerName) {
+		
+	};
+	
+	public void showCardForPlayer(int i, String name,
+			String rank, String suit) {
+		
+	};
 }
 public class GameController {
 	// attributes
@@ -38,15 +67,15 @@ public class GameController {
 	// Methods --regarder l'etat du jeu et appel une methode de la vue
 	public void run() {
 		while(gameState == GameState.AddingPlayers) {
-			view.something();
+			view.promptForPlayerName();
 		}
 		
 		switch(gameState) {
 		case CardsDealt:
-			view.something();
+			view.promptForFlip();
 			break;
 		case WinnerRevealed:
-			view.something();
+			view.promptForNewGame();
 			break;
 		}
 	}
@@ -55,7 +84,7 @@ public class GameController {
 	public void addPlayer(String playerName) {
 		if(gameState == GameState.AddingPlayers) {
 			players.add(new Player(playerName));
-			view.something();
+			view.showPlayerName(players.size(), playerName);
 		}
 	}
 	
@@ -63,9 +92,10 @@ public class GameController {
 	public void startGame() {
 		if(gameState != GameState.CardsDealt) {
 			deck.shuffle();
+			int playerIndex = 1;
 			for(Player player : players) {
 				player.addCardToHand(deck.removeTopCard());
-				view.something();
+				view.showFaceDownCardForPlayer(playerIndex++, player.getName());
 			}
 			gameState = GameState.CardsDealt;
 		}
@@ -74,10 +104,12 @@ public class GameController {
 	
 	// Method pour montrer les cartes et afficher le gagnant
 	public void flipCards() {
+		int playerIndex = 1;
 		for(Player player : players) {
 			PlayingCard pc = player.getCard(0);
 			pc.flip();
-			view.something();
+			view.showCardForPlayer(playerIndex++, player.getName(),
+					pc.getRank().toString(), pc.getSuit().toString());
 		}
 		
 		evaluateWinner();
@@ -118,9 +150,9 @@ public class GameController {
 			}
 		}
 	}
-	// method displayWinner()
+	// method displayWinner() qui affiche le nom du gagnant
 	void displayWinner() {
-		view.something();
+		view.showWinner(winner.getName());
 	}
 	// Method rebuildDeck(): récupérer toutes les cartes distribuée et les remets dans le jeu.
 	void rebuildDeck() {
