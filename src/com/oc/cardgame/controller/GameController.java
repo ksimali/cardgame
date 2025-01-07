@@ -6,41 +6,9 @@ import java.util.List;
 import com.oc.cardgame.model.Deck;
 import com.oc.cardgame.model.Player;
 import com.oc.cardgame.model.PlayingCard;
+import com.oc.cardgame.view.View;
 
-class View {
-	public void something() {}
-	
-	public void setController(GameController gc) {}
-	
-	public void promptForPlayerName() {
-		
-	};
-	
-	public void promptForFlip() {
-		
-	};
-	
-	public void promptForNewGame() {
-		
-	};
-	
-	public void showWinner(String name) {
-		
-	}
-	
-	public void showPlayerName(int size, String playerName) {
-		
-	};
-	
-	public void showFaceDownCardForPlayer(int i, String playerName) {
-		
-	};
-	
-	public void showCardForPlayer(int i, String name,
-			String rank, String suit) {
-		
-	};
-}
+
 public class GameController {
 	// attributes
 	enum GameState {
