@@ -38,7 +38,7 @@ public class GameController {
 			view.promptForPlayerName();
 		}
 		
-		switch(gameState) {
+		switch (gameState) {
 		case CardsDealt:
 			view.promptForFlip();
 			break;
@@ -117,6 +117,7 @@ public class GameController {
 				bestSuit = pc.getSuit().value();
 			}
 		}
+		winner = bestPlayer;
 	}
 	// method displayWinner() qui affiche le nom du gagnant
 	void displayWinner() {
