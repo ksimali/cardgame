@@ -4,6 +4,11 @@ public class Player {
 	private String name;
 	private Hand hand;
 	
+	// Getter
+	public String getName() {
+		return name;
+	}
+	
 	// Constructor
 	public Player(String name) {
 		this.name = name;
