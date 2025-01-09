@@ -107,5 +107,20 @@ public class GameController {
 			deck.returnCardToDeck(player.removeCard());
 		}
 	}
+	
+	// Method exit pour quitter le jeux
+	void exitGame() {
+		System.exit(0);
+	}
+
+	public void nextAction(String nextChoice) {
+		
+		if("+q".equals(nextChoice)) {
+			exitGame();
+		}else {
+			startGame();
+		}
+		
+	}
 
 }
