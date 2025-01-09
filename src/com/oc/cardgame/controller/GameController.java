@@ -7,7 +7,8 @@ import com.oc.cardgame.games.GameEvaluator;
 import com.oc.cardgame.model.Deck;
 import com.oc.cardgame.model.Player;
 import com.oc.cardgame.model.PlayingCard;
-import com.oc.cardgame.view.View;
+import com.oc.cardgame.view.CommandLineView;
+import com.oc.cardgame.view.GameViewable;
 
 
 public class GameController {
@@ -18,7 +19,7 @@ public class GameController {
 	Deck deck;
 	List<Player> players;
 	Player winner;
-	View view;
+	GameViewable view;
 	
 	GameState gameState;
 	
@@ -26,7 +27,7 @@ public class GameController {
 	GameEvaluator evaluator;
 	
 	// Constructor
-	public GameController(Deck deck, View view, GameEvaluator evaluator) {
+	public GameController(Deck deck, GameViewable view, GameEvaluator evaluator) {
 		super();
 		this.deck = deck;
 		this.view = view;
