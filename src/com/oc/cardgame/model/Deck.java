@@ -5,25 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Deck {
+public abstract class Deck {
 	// attributes
-	private List<PlayingCard> cards;
+	protected List<PlayingCard> cards;
 	
 	// Getter
 	public List<PlayingCard> getCards(){
 		return cards;
-	}
-	
-	// Constructor -- on créer les les 52 cartes par combinaison de Rank et Suit
-	public Deck() {
-		cards = new ArrayList<PlayingCard>();
-		for(Rank rank : Rank.values()) {
-			for(Suit suit : Suit.values()) {
-				System.out.println();
-				cards.add(new PlayingCard(rank, suit));
-			}
-		}
-		shuffle(); // On mélange les cartes
 	}
 	
 	// method pour mélanger les cartes
