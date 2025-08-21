@@ -1,6 +1,6 @@
 package com.oc.cardgame.model;
 
-public class Player {
+public class Player implements IPlayer{
 	private String name;
 	private Hand hand;
 	

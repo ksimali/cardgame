@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.oc.cardgame.games.GameEvaluator;
 import com.oc.cardgame.model.Deck;
+import com.oc.cardgame.model.IPlayer;
 import com.oc.cardgame.model.Player;
 import com.oc.cardgame.model.PlayingCard;
+import com.oc.cardgame.model.WinningPlayer;
 import com.oc.cardgame.view.CommandLineView;
 import com.oc.cardgame.view.GameViewable;
 
@@ -17,8 +19,8 @@ public class GameController {
 		AddingPlayers, CardsDealt, WinnerRevealed;
 	}
 	Deck deck;
-	List<Player> players;
-	Player winner;
+	List<IPlayer> players;
+	IPlayer winner;
 	GameViewable view;
 	
 	GameState gameState;
@@ -31,7 +33,7 @@ public class GameController {
 		super();
 		this.deck = deck;
 		this.view = view;
-		this.players = new ArrayList<Player>();
+		this.players = new ArrayList<IPlayer>();
 		this.gameState = GameState.AddingPlayers;
 		view.setController(this);
 		this.evaluator = evaluator;
@@ -67,7 +69,7 @@ public class GameController {
 		if(gameState != GameState.CardsDealt) {
 			deck.shuffle();
 			int playerIndex = 1;
-			for(Player player : players) {
+			for(IPlayer player : players) {
 				player.addCardToHand(deck.removeTopCard());
 				view.showFaceDownCardForPlayer(playerIndex++, player.getName());
 			}
@@ -79,7 +81,7 @@ public class GameController {
 	// Method pour montrer les cartes et afficher le gagnant
 	public void flipCards() {
 		int playerIndex = 1;
-		for(Player player : players) {
+		for(IPlayer player : players) {
 			PlayingCard pc = player.getCard(0);
 			pc.flip();
 			view.showCardForPlayer(playerIndex++, player.getName(),
@@ -95,7 +97,7 @@ public class GameController {
 	
 	// method evaluateWinner()
 	void evaluateWinner() {
-		winner = evaluator.evaluateWinner(players);
+		winner = new WinningPlayer(evaluator.evaluateWinner(players));
 	}
 	// method displayWinner() qui affiche le nom du gagnant
 	void displayWinner() {
@@ -103,7 +105,7 @@ public class GameController {
 	}
 	// Method rebuildDeck(): récupérer toutes les cartes distribuée et les remets dans le jeu.
 	void rebuildDeck() {
-		for(Player player : players) {
+		for(IPlayer player : players) {
 			deck.returnCardToDeck(player.removeCard());
 		}
 	}
